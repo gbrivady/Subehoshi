@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(subehoshi VERSION 0.1.0)
+
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+add_subdirectory(src)
+
