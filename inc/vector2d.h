@@ -17,6 +17,7 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 #include <math.h>
+#include <stdlib.h>
 
 /**
  * @brief A 2D double vector.
