@@ -7,6 +7,8 @@ vector2d *v2d_null(){
         // TODO : pretty error message
         exit(1);
     }
+    p_u->x = 0;
+    p_u->y = 0;
     return p_u;
 }
 
