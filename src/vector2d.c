@@ -12,6 +12,11 @@ vector2d *v2d_null(){
     return p_u;
 }
 
+void v2d_reset(vector2d* u){
+    u->x = 0;
+    u->y = 0;
+}
+
 void v2d_copy(vector2d* v2dp, vector2d* v2dc){
     v2dp->x = v2dc->x;
     v2dp->y = v2dc->y;
@@ -23,33 +28,30 @@ vector2d* v2d_copy_f(vector2d *v2d){
     return v2d_;
 }
 
-void v2d_add(vector2d* u, vector2d* v){
+void v2d_incr(vector2d* u, vector2d* v){
     u->x = u->x + v->x;
     u->y = u->y + v->y;
 }
 
-vector2d *v2d_add_f(vector2d * u, vector2d * v){
-    vector2d* w = v2d_null();
+void v2d_add(vector2d * u, vector2d * v, vector2d* w){
     w->x = u->x + v->x;
     w->y = u->y + v->y;
-    return w;
 }
 
-void v2d_sub(vector2d* u, vector2d* v){
+void v2d_decr(vector2d* u, vector2d* v){
     u->x = u->x - v->x;
     u->y = u->y - v->y;
 }
-vector2d *v2d_sub_f(vector2d * u, vector2d * v){
-    vector2d* w = v2d_null();
+void v2d_sub(vector2d * u, vector2d * v, vector2d* w){
     w->x = u->x - v->x;
     w->y = u->y - v->y;
-    return w;
 }
 
 void v2d_scale(double k, vector2d* u){
     u->x = k*u->x;
     u->y = k*u->y;
 }
+
 vector2d *v2d_scale_f(double k, vector2d *u){
     vector2d* v = v2d_copy_f(u);
     v2d_scale(k, v);
