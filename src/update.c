@@ -60,9 +60,9 @@ void calc_k1(body** body_list, const int nb_body, vector2d** k1){
         v2d_scale(-1.0, temp_acc);
         v2d_incr(k1[i], temp_acc);
     }
-    for (int i = 1; i < nb_body; i++)
+    for (int i = 1; i < nb_body-1; i++)
     {
-        for (int j = i+1; j < nb_body-1; j++)
+        for (int j = i+1; j < nb_body; j++)
         {
             calc_acc(body_list[i]->pos, body_list[j]->pos, temp_acc);
             v2d_incr(k1[i], temp_acc);
