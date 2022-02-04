@@ -15,7 +15,7 @@ int main(int argc, char *argv[]){
     {
         for (int j = 0; j < 10; j++)
         {
-            body_list[10*i+j] = create_body(100. * i - 500, 100. * j - 500, 0.0, 0.0, 1.0);
+            body_list[10*i+j] = create_body(100. * i - 450, 100. * j - 450, 0.0, 0.0, 1.0);
         }
         
     }
