@@ -42,7 +42,7 @@ void free_k(vector2d*** k_1234, const int nb_body){
 
 void calc_acc(vector2d* pos1, vector2d* pos2, vector2d* output_v2d){
     v2d_sub(pos2, pos1, output_v2d);
-    double strength = pow(v2d_norm2(output_v2d), -3.0/2.0);
+    double strength = pow(fmax(v2d_norm2(output_v2d), MINIMAL_DISTANCE_SQ), -3.0/2.0);    
     v2d_scale(strength, output_v2d);
 }
 

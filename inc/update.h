@@ -2,8 +2,8 @@
  * @file update.h
  * @author Grégory Brivady (gregory.brivady@gmail.com)
  * @brief 
- * @version 0.1
- * @date 2022-02-03
+ * @version 0.2
+ * @date 2022-02-06
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -14,6 +14,8 @@
 
 #include "vector2d.h"
 #include "body.h"
+
+#define MINIMAL_DISTANCE_SQ 25.0
 
 vector2d*** init_k(const int nb_body);
 
