@@ -1,7 +1,8 @@
 add_executable(app main.c
                    vector2d.c
                    update.c
-                   body.c)
+                   body.c
+                   display.c)
 
 find_package(SDL2 REQUIRED)
 

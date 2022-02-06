@@ -4,5 +4,6 @@
 #include "vector2d.h"
 #include "body.h"
 #include "update.h"
+#include "display.h"
 
 #endif
