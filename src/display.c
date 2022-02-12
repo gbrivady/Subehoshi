@@ -20,8 +20,7 @@ void start_graphics(int width, int height, SDL_Window* window, SDL_Renderer** p_
     }
 }
 
-void end_graphics(SDL_Window* window, SDL_Renderer** p_renderer){
-    SDL_DestroyRenderer(*p_renderer); 
+void end_graphics(SDL_Window* window){
     SDL_DestroyWindow( window );
     SDL_Quit();
 }

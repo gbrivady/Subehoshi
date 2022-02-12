@@ -2,8 +2,8 @@
  * @file display.h
  * @author Grégory Brivady (gregory.brivady@gmail.com)
  * @brief 
- * @version 0.1
- * @date 2022-02-06
+ * @version 0.2
+ * @date 2022-02-11
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -12,15 +12,15 @@
 #define DISPLAY_H
 
 #define SDL_MAIN_HANDLED
-#include "body.h"
 #include <stdio.h>
 #include <SDL.h>
+#include "body.h"
 
 enum keyboard_action {NO_EVENT, NEXT_FRAME, TOGGLE_SIM, EXIT_SIM};
 
 void start_graphics(int width, int height, SDL_Window* window, SDL_Renderer** p_renderer);
 
-void end_graphics(SDL_Window* window, SDL_Renderer** p_renderer);
+void end_graphics(SDL_Window* window);
 
 void init_frames(body** body_list, int nb_body, SDL_FRect* rects);
 

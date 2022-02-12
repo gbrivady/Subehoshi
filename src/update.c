@@ -191,5 +191,5 @@ void update(body** body_list, const int nb_body, const double timestep, vector2d
         v2d_incr(body_list[i]->vel, temp_v2d);
 
     }
-    
+    free(temp_v2d);
 }
