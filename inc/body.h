@@ -15,9 +15,9 @@
 
 typedef struct body
 {
-    vector2d* vel;
-    vector2d* pos;
     double mass;
+    vector2d pos;
+    vector2d vel;
 
 }body;
 

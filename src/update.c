@@ -55,7 +55,7 @@ void calc_k1(body** body_list, const int nb_body, vector2d** k1){
     {
         k1[i]->x = 0;
         k1[i]->y = 0;
-        calc_acc(body_list[0]->pos, body_list[i]->pos, temp_acc);
+        calc_acc(&(body_list[0]->pos), &(body_list[i]->pos), temp_acc);
         v2d_incr(k1[0], temp_acc);
         v2d_scale(-1.0, temp_acc);
         v2d_incr(k1[i], temp_acc);
@@ -64,7 +64,7 @@ void calc_k1(body** body_list, const int nb_body, vector2d** k1){
     {
         for (int j = i+1; j < nb_body; j++)
         {
-            calc_acc(body_list[i]->pos, body_list[j]->pos, temp_acc);
+            calc_acc(&(body_list[i]->pos), &(body_list[j]->pos), temp_acc);
             v2d_incr(k1[i], temp_acc);
             v2d_scale(-1.0, temp_acc);
             v2d_incr(k1[j], temp_acc);
@@ -83,10 +83,10 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
     vector2d* temp_pos_k = v2d_null();
     vector2d* temp_v2d = v2d_null();
 
-    v2d_copy(temp_pos_k, body_list[0]->pos);
+    v2d_copy(temp_pos_k, &(body_list[0]->pos));
 
     //k2 is calculated with pos + h*vel/2
-    v2d_copy(temp_v2d, body_list[0]->vel);
+    v2d_copy(temp_v2d, &(body_list[0]->vel));
     v2d_scale(timestep/2.0, temp_v2d);
     v2d_incr(temp_pos_k, temp_v2d);
 
@@ -95,7 +95,7 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
     {
         v2d_reset(k2[i]);
         v2d_reset(k4[i]);
-        calc_acc(temp_pos_k, body_list[i]->pos, temp_acc);
+        calc_acc(temp_pos_k, &(body_list[i]->pos), temp_acc);
         v2d_incr(k2[0], temp_acc);
     }
     //Calculates k3
@@ -106,21 +106,21 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
     for (int i = 1; i < nb_body; i++)
     {
         v2d_reset(k3[i]);
-        calc_acc(temp_pos_k, body_list[i]->pos, temp_acc);
+        calc_acc(temp_pos_k, &(body_list[i]->pos), temp_acc);
         v2d_incr(k2[0], temp_acc);
     }
 
     for (int i = 1; i < nb_body; i++)
     {
-        v2d_copy(temp_pos_k, body_list[i]->pos);
-        v2d_copy(temp_v2d, body_list[i]->vel);
+        v2d_copy(temp_pos_k, &(body_list[i]->pos));
+        v2d_copy(temp_v2d, &(body_list[i]->vel));
         v2d_scale(timestep/2.0, temp_v2d);
         v2d_incr(temp_pos_k, temp_v2d);
         for (int j = 0; j < nb_body; j++)
         {
             if(i == j)
                 continue;
-            calc_acc(temp_pos_k, body_list[j]->pos, temp_acc);
+            calc_acc(temp_pos_k, &(body_list[j]->pos), temp_acc);
             v2d_incr(k2[i], temp_acc);
         }
         v2d_copy(temp_v2d, k1[i]);
@@ -130,7 +130,7 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
         {
             if(i == j)
                 continue;
-            calc_acc(temp_pos_k, body_list[j]->pos, temp_acc);
+            calc_acc(temp_pos_k, &(body_list[j]->pos), temp_acc);
             v2d_incr(k3[i], temp_acc);
         }
     }
@@ -139,8 +139,8 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
     for (int i = 0; i < nb_body; i++)
     {
         //temp_pos = old_pos + h*vel + ...
-        v2d_copy(temp_pos_k, body_list[i]->pos);
-        v2d_copy(temp_v2d, body_list[i]->vel);
+        v2d_copy(temp_pos_k, &(body_list[i]->pos));
+        v2d_copy(temp_v2d, &(body_list[i]->vel));
         v2d_scale(timestep, temp_v2d);
         v2d_incr(temp_pos_k, temp_v2d);
 
@@ -152,7 +152,7 @@ void calc_k234(body** body_list, const int nb_body, const double timestep,
         {
             if (i == j)
                 continue;
-            calc_acc(temp_pos_k, body_list[j]->pos, temp_acc);
+            calc_acc(temp_pos_k, &(body_list[j]->pos), temp_acc);
             v2d_incr(k4[i], temp_acc);
         }
         
@@ -171,15 +171,15 @@ void update(body** body_list, const int nb_body, const double timestep, vector2d
     //vel = old_vel + timestep * (k1 + 2*k2 + 2*k3 + k4)/6
     for (int i = 0; i < nb_body; i++)
     {
-        v2d_copy(temp_v2d, body_list[i]->vel);
+        v2d_copy(temp_v2d, &(body_list[i]->vel));
         v2d_scale(timestep, temp_v2d);
-        v2d_incr(body_list[i]->pos, temp_v2d);
+        v2d_incr(&(body_list[i]->pos), temp_v2d);
 
         v2d_copy(temp_v2d, k_1234[0][i]);
         v2d_incr(temp_v2d, k_1234[1][i]);
         v2d_incr(temp_v2d, k_1234[2][i]);
         v2d_scale(timestep*timestep/6.0, temp_v2d);
-        v2d_incr(body_list[i]->pos, temp_v2d);
+        v2d_incr(&(body_list[i]->pos), temp_v2d);
 
         v2d_copy(temp_v2d, k_1234[1][i]);
         v2d_incr(temp_v2d, k_1234[2][i]);
@@ -188,7 +188,7 @@ void update(body** body_list, const int nb_body, const double timestep, vector2d
         v2d_incr(temp_v2d, k_1234[0][i]);
         v2d_incr(temp_v2d, k_1234[3][i]);
         v2d_scale(timestep/6.0, temp_v2d);
-        v2d_incr(body_list[i]->vel, temp_v2d);
+        v2d_incr(&(body_list[i]->vel), temp_v2d);
 
     }
     free(temp_v2d);
