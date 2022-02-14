@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef VECTOR2D_H
-#define VECTOR2D_H
+#ifndef CPU_VECTOR2D_H
+#define CPU_VECTOR2D_H
 #include <math.h>
 #include <stdlib.h>
 
