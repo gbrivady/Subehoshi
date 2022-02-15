@@ -11,6 +11,10 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SDL_MAIN_HANDLED
 #include <stdio.h>
 #include <SDL.h>
@@ -26,7 +30,10 @@ void init_frames(body** body_list, int nb_body, SDL_FRect* rects);
 
 void draw_frame(body** body_list, int nb_body, SDL_Renderer* renderer, SDL_FRect* rects);
 
-
 enum keyboard_action check_keyboard();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
