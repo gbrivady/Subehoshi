@@ -11,12 +11,20 @@ int main(int argc, char *argv[]){
     struct timespec phX_time_end;
     unsigned long long avr_phX_time = 0;
     unsigned int phX_frame_nb = 0;
-    int nb_body = 900;
+    int nb_body;
+    if (argc > 1)
+    {
+        nb_body = atoi(argv[1]);
+    }else{
+        nb_body = 400;
+    }
+    double space_step = 1000/sqrt(nb_body);
+    int grid_space = sqrt(nb_body);
 
     body** body_list = malloc(nb_body*sizeof(body*));
     for (int i = 0; i < nb_body; i++)
     {
-        body_list[i] = create_body(33 * (i % 30), 33 * (i / 30), 0, 0, 1.0);        
+        body_list[i] = create_body(space_step * (i % grid_space), space_step * (i / grid_space), 0, 0, 1.0);        
     }
     vector2d*** k_1234 = init_k(nb_body);
     SDL_Renderer* renderer = NULL;

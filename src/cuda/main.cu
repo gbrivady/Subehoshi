@@ -11,7 +11,16 @@ const int SCREEN_HEIGHT = 1000;
 
 int main(int argc, char const *argv[])
 {
-    int nb_body = 900;
+    int nb_body;
+    if (argc > 1)
+    {
+        nb_body = atoi(argv[1]);
+    }else{
+        nb_body = 400;
+    }
+    double space_step = 1000/sqrt(nb_body);
+    int grid_space = sqrt(nb_body);
+    //int nb_body = 900;
     dim3 grid_th(32, 32);
     //dim3 grid_blk(__max(1, nb_body/16),__max(1, nb_body/16));
     dim3 grid_blk(1 + nb_body/32, 1 + nb_body/32);
@@ -24,8 +33,8 @@ int main(int argc, char const *argv[])
     /* Setup for PhX */
     body* body_list = (body*) malloc(nb_body*sizeof(body));
     for(int i = 0; i < nb_body; i++){
-        body_list[i].pos.x = 33 * (i % 30);
-        body_list[i].pos.y = 33 * (i / 30);
+        body_list[i].pos.x = space_step * (i % grid_space);
+        body_list[i].pos.y = space_step * (i / grid_space);
         body_list[i].vel.x = 0;
         body_list[i].vel.y = 0;
         body_list[i].mass = 1;
