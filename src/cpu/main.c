@@ -11,23 +11,19 @@ int main(int argc, char *argv[]){
     struct timespec phX_time_end;
     unsigned long long avr_phX_time = 0;
     unsigned int phX_frame_nb = 0;
+    int nb_body = 900;
 
-    body* body_list[100];
-    for (int i = 0; i < 10; i++)
+    body** body_list = malloc(nb_body*sizeof(body*));
+    for (int i = 0; i < nb_body; i++)
     {
-        for (int j = 0; j < 10; j++)
-        {
-            body_list[10*i+j] = create_body(100. * i, 100. * j, 0, 0, 1.0);
-        }
-        
+        body_list[i] = create_body(33 * (i % 30), 33 * (i / 30), 0, 0, 1.0);        
     }
-    int nb_body = 100;
     vector2d*** k_1234 = init_k(nb_body);
     SDL_Renderer* renderer = NULL;
     SDL_Window* window = NULL;
     start_graphics(SCREEN_WIDTH, SCREEN_HEIGHT, window, &renderer);
     SDL_Event event;
-    SDL_FRect rects[100];
+    SDL_FRect* rects =(SDL_FRect*) malloc(nb_body*sizeof(SDL_FRect));
     init_frames(body_list, nb_body, rects);
     enum keyboard_action cur_action;
     draw_frame(body_list, nb_body, renderer, rects);
@@ -73,15 +69,11 @@ int main(int argc, char *argv[]){
     }
 
     free_k(k_1234, nb_body);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < nb_body; i++)
     {
-        for (int j = 0; j < 10; j++)
-        {
-            free_body(body_list[10*i+j]);
-        }
-        
+        free_body(body_list[nb_body]);
     }
-    printf("Average frame duration : %lld microseconds over %d frames \n", (avr_phX_time/phX_frame_nb)/1000000 , phX_frame_nb);
+    printf("Average frame duration : %lld microseconds over %d frames \n", (avr_phX_time/phX_frame_nb)/1000 , phX_frame_nb);
     // free_body(body1);
     // free_body(body2);
     // free_body(body3);
