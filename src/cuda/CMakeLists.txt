@@ -8,6 +8,7 @@ target_include_directories(appCUDA PRIVATE
 ${CMAKE_SOURCE_DIR}/inc 
 ${CMAKE_SOURCE_DIR}/inc/cuda
 )
+set_target_properties(appCUDA PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 enable_language(CUDA)
 set_target_properties(appCUDA
