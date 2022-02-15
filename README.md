@@ -16,7 +16,7 @@ Number of objects to run in the simulation can be passed as command line argumen
 
 ## Compilation
 
-The project was build using CMake.
+The project was built using CMake.
 
 Two targets are provided : appCPU and appCUDA. First one is a CPU-only app, while the second one is the CUDA version.
 
