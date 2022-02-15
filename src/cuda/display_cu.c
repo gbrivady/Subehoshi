@@ -1,4 +1,4 @@
-#include "display.h"
+#include "display_cu.h"
 
 
 void start_graphics(int width, int height, SDL_Window* window, SDL_Renderer** p_renderer){
@@ -26,22 +26,22 @@ void end_graphics(SDL_Window* window){
 }
 
 
-void init_frames(body** body_list, int nb_body, SDL_FRect* rects){
+void init_frames(body* body_list, int nb_body, SDL_FRect* rects){
     for (int i = 0; i < nb_body; i++){
-        SDL_FRect temp_rect = {body_list[i]->pos.x, body_list[i]->pos.y, 5., 5.};
+        SDL_FRect temp_rect = {body_list[i].pos.x, body_list[i].pos.y, 5., 5.};
         rects[i] = temp_rect;
     }
 }
 
-void draw_frame(body** body_list, int nb_body, SDL_Renderer* renderer, SDL_FRect* rects){
+void draw_frame(body* body_list, int nb_body, SDL_Renderer* renderer, SDL_FRect* rects){
     //clears screen
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     //updates the rectangle position
     for (int i = 0; i < nb_body; i++){
-        rects[i].x = body_list[i]->pos.x;
-        rects[i].y = body_list[i]->pos.y;
+        rects[i].x = body_list[i].pos.x;
+        rects[i].y = body_list[i].pos.y;
     }
     //draws the rectangles, refreshes screen
     SDL_RenderFillRectsF(renderer, rects, nb_body);

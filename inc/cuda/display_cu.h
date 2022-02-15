@@ -26,9 +26,9 @@ void start_graphics(int width, int height, SDL_Window* window, SDL_Renderer** p_
 
 void end_graphics(SDL_Window* window);
 
-void init_frames(body** body_list, int nb_body, SDL_FRect* rects);
+void init_frames(body* body_list, int nb_body, SDL_FRect* rects);
 
-void draw_frame(body** body_list, int nb_body, SDL_Renderer* renderer, SDL_FRect* rects);
+void draw_frame(body* body_list, int nb_body, SDL_Renderer* renderer, SDL_FRect* rects);
 
 enum keyboard_action check_keyboard();
 

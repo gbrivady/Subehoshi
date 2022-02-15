@@ -2,27 +2,23 @@
  * @file vector2d.h
  * @author Gregory Brivady (gregory.brivady@gmail.com)
  * @brief Simple definition of a two-dimensionnal double vector.
- * @version 0.2
- * @date 2022-02-03
+ * @version 0.3
+ * @date 2022-02-14
  * 
  * @copyright Copyright (c) 2022
  * 
  */
 
-#ifndef VECTOR2D_H
-#define VECTOR2D_H
+#ifndef CPU_VECTOR2D_H
+#define CPU_VECTOR2D_H
 #include <math.h>
 #include <stdlib.h>
 
+#include "body.h"
 /**
  * @brief A 2D double vector.
  * 
  */
-typedef struct vector2Ddouble
-{
-    double x;
-    double y;
-} vector2d;
 
 /**
  * @return A pointer to the vector (0, 0).
