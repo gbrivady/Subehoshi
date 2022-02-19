@@ -8,6 +8,8 @@ Displays a bunch of objects with the same mass, all interacting with each others
 
 Number of objects to run in the simulation can be passed as command line argument.
 
+Simulation starts on hold, press "P" to play/pause and if paused "N" to display the next frame.
+
 ## Planned Features
 
 - A nice GUI, a better Camera, better displaying, and 3D
